@@ -1,0 +1,263 @@
+@font-face {
+  font-family: "Lexend Deca";
+  src: url("./fonts/LexendDeca-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Basic reset for predictable sizing */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+/* Typography system tokens */
+:root {
+  /* Base font stack */
+  --font-sans: "Lexend Deca", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+
+  /* Modular scale ratio (major third) */
+  --ratio: 1.25;
+
+  /* Fluid base size */
+  --step-0: clamp(1rem, 0.4vw + 0.9rem, 1.125rem);
+
+  /* Modular scale steps */
+  --step--1: calc(var(--step-0) / var(--ratio));
+  --step-1: calc(var(--step-0) * var(--ratio));
+  --step-2: calc(var(--step-1) * var(--ratio));
+  --step-3: calc(var(--step-2) * var(--ratio));
+  --step-4: calc(var(--step-3) * var(--ratio));
+  --step-5: calc(var(--step-4) * var(--ratio));
+
+  /* Larger headings use clamp for smoother scaling */
+  --h1-fluid: clamp(2.1rem, 2.2vw + 1.6rem, 3.2rem);
+  --h2-fluid: clamp(1.6rem, 1.3vw + 1.2rem, 2.25rem);
+
+  /* Line-height values */
+  --lh-body: 1.6;
+  --lh-tight: 1.15;
+
+  /* Measure for readability */
+  --measure-body: 66ch;
+  --measure-heading: 32ch;
+
+  /* Baseline rhythm for vertical spacing */
+  --rhythm: 0.5rem;
+  --space-1: calc(var(--rhythm) * 2);
+  --space-2: calc(var(--rhythm) * 3);
+  --space-3: calc(var(--rhythm) * 4);
+  --space-4: calc(var(--rhythm) * 6);
+
+  /* Neutral color palette */
+  --bg: #f7f4ee;
+  --surface: #efe9dc;
+  --text: #2f3a2e;
+  --muted: #616b5f;
+  --border: color-mix(in srgb, var(--text) 18%, transparent);
+  --accent: #7a8f6b;
+}
+
+/* Base typography styles */
+body {
+  font-family: var(--font-sans);
+  font-size: var(--step-0);
+  line-height: var(--lh-body);
+  background: var(--bg);
+  color: var(--text);
+}
+
+/* Layout supports readable line length */
+main {
+  display: grid;
+  gap: var(--space-4);
+  padding: var(--space-4) var(--space-2);
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+article {
+  max-width: var(--measure-body);
+}
+
+aside {
+  max-width: 45ch;
+}
+
+/* Two-column layout on larger screens */
+@media (min-width: 900px) {
+  main {
+    grid-template-columns: 1fr 320px;
+    align-items: start;
+  }
+}
+
+/* Navigation typography */
+header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: var(--space-2);
+}
+
+nav {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+nav a {
+  font-size: var(--step--1);
+  text-decoration: none;
+  color: var(--muted);
+  padding: calc(var(--rhythm) * 1) calc(var(--rhythm) * 1.5);
+  border-radius: 0.6rem;
+  transition: background 180ms ease, color 180ms ease;
+}
+
+nav a:hover {
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--text);
+}
+
+nav a:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  outline-offset: 3px;
+}
+
+/* Heading hierarchy */
+h1,
+h2,
+h3,
+h4 {
+  max-width: var(--measure-heading);
+  line-height: var(--lh-tight);
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+h1 {
+  font-size: var(--h1-fluid);
+  margin-bottom: var(--space-2);
+}
+
+h2 {
+  font-size: var(--h2-fluid);
+  margin-top: var(--space-4);
+  margin-bottom: var(--space-2);
+}
+
+h3 {
+  font-size: var(--step-2);
+  margin-top: var(--space-3);
+  margin-bottom: var(--space-1);
+}
+
+h4 {
+  font-size: var(--step-1);
+  margin-top: var(--space-2);
+  margin-bottom: var(--space-1);
+}
+
+/* Paragraph rhythm */
+p {
+  margin: 0;
+}
+
+p + p {
+  margin-top: var(--space-2);
+}
+
+.lead {
+  font-size: var(--step-1);
+  color: var(--muted);
+  margin-bottom: var(--space-2);
+  max-width: 60ch;
+}
+
+.small {
+  font-size: var(--step--1);
+  color: var(--muted);
+  margin-top: var(--space-3);
+}
+
+/* Lists align to baseline rhythm */
+ul,
+ol {
+  margin: var(--space-2) 0;
+  padding-left: var(--space-3);
+}
+
+li + li {
+  margin-top: var(--space-1);
+}
+
+/* Blockquote styling */
+blockquote {
+  margin: var(--space-3) 0;
+  padding: var(--space-2);
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+  border-left: 6px solid var(--accent);
+  border-radius: 0.75rem;
+}
+
+blockquote p {
+  font-size: var(--step-1);
+}
+
+cite {
+  display: block;
+  margin-top: var(--space-1);
+  font-size: var(--step--1);
+  color: var(--muted);
+}
+
+/* Content links */
+a {
+  color: color-mix(in srgb, var(--accent) 75%, black);
+  text-underline-offset: 0.15em;
+}
+
+a:hover {
+  text-decoration-thickness: 0.12em;
+}
+
+/* UI containers */
+.card,
+.callout {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: var(--space-2);
+}
+
+.card h3,
+.callout h3 {
+  margin-top: 0;
+}
+
+.callout {
+  margin-top: var(--space-3);
+  border-left: 6px solid color-mix(in srgb, var(--accent) 60%, black);
+}
+
+/* Footer typography */
+footer {
+  border-top: 1px solid var(--border);
+  padding: var(--space-2);
+  color: var(--muted);
+  font-size: var(--step--1);
+  text-align: center;
+  background: var(--surface);
+}
