@@ -1,0 +1,549 @@
+/**
+ * Product Showcase - Theming System
+ *
+ * ARCHITECTURE CHOICE: CUBE CSS
+ * - Composition: Layout patterns (.container, .flow, .grid)
+ * - Utilities: Single-purpose classes (.visually-hidden)
+ * - Blocks: Component styles (.site-header, .theme-toggle, .product-card, etc.)
+ * - Exceptions: State variations (.active) + pseudo-classes
+ *
+ * Summer / relaxed direction:
+ * - Warm sand background + seafoam/sky accents
+ * - Softer shadows, rounder corners
+ * - Airy spacing and gentle gradients
+ *
+ * Modern CSS used:
+ * - CSS nesting
+ * - Custom properties for theming
+ * - color-mix(in oklch, ...) for variations and states
+ * - Modern selectors (:is, :where, :has, :not)
+ * - Logical properties
+ * - prefers-color-scheme + prefers-reduced-motion
+ */
+
+/* =========================
+   SETTINGS (Tokens / Theme)
+   ========================= */
+
+:root {
+  color-scheme: light dark;
+
+  /* Layout + type scales */
+  --container: 72rem;
+
+  --radius-1: 0.9rem;
+  --radius-2: 1.6rem;
+
+  --space-1: 0.5rem;
+  --space-2: 0.75rem;
+  --space-3: 1rem;
+  --space-4: 1.5rem;
+  --space-5: 2.25rem;
+  --space-6: 3.25rem;
+
+  --font-sans: ui-rounded, system-ui, -apple-system, Segoe UI, Roboto, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+
+  --text-sm: clamp(0.9rem, 0.35vw + 0.85rem, 1rem);
+  --text-base: clamp(1rem, 0.4vw + 0.95rem, 1.1rem);
+  --text-lg: clamp(1.15rem, 0.8vw + 1rem, 1.35rem);
+  --text-xl: clamp(1.45rem, 1.3vw + 1.1rem, 1.95rem);
+  --text-2xl: clamp(1.9rem, 2.2vw + 1.25rem, 2.8rem);
+
+  /* Base palette (oklch) */
+  --sun: oklch(0.86 0.12 85);     /* warm sun */
+  --sand: oklch(0.97 0.03 85);    /* beach sand */
+  --sea: oklch(0.72 0.12 200);    /* seafoam */
+  --sky: oklch(0.78 0.10 235);    /* sky blue */
+  --coral: oklch(0.72 0.16 25);   /* coral accent */
+
+  --neutral-0: oklch(0.995 0 0);
+  --neutral-900: oklch(0.19 0 0);
+
+  /* Primary brand for buttons/active states */
+  --color-primary: color-mix(in oklch, var(--sea) 65%, var(--sky));
+
+  /* Generate variations (required color-mix usage) */
+  --color-primary-weak: color-mix(in oklch, var(--color-primary) 16%, var(--sand));
+  --color-primary-hover: color-mix(in oklch, var(--color-primary) 88%, black);
+  --color-primary-active: color-mix(in oklch, var(--color-primary) 78%, black);
+
+  /* Semantic (Light default) */
+  --color-bg: var(--sand);
+  --color-surface: var(--neutral-0);
+  --color-surface-2: color-mix(in oklch, var(--color-surface) 86%, var(--sun));
+  --color-text: var(--neutral-900);
+  --color-muted: color-mix(in oklch, var(--color-text) 65%, var(--color-bg));
+  --color-border: color-mix(in oklch, var(--color-text) 14%, var(--color-bg));
+
+  /* Shadows + ring */
+  --shadow-color: color-mix(in oklch, var(--color-text) 9%, var(--color-bg));
+  --shadow-1: 0 0.8rem 2rem var(--shadow-color);
+
+  --ring: color-mix(in oklch, var(--color-primary) 38%, white);
+  --ring-offset: color-mix(in oklch, var(--color-bg) 85%, white);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.85, 0.2, 1);
+  --dur: 230ms;
+}
+
+/* Dark theme overrides */
+.dark-theme {
+  --color-bg: oklch(0.18 0.02 220);
+  --color-surface: oklch(0.23 0.02 220);
+  --color-surface-2: color-mix(in oklch, var(--color-surface) 86%, var(--sea));
+
+  --color-text: oklch(0.95 0 0);
+  --color-muted: color-mix(in oklch, var(--color-text) 65%, var(--color-bg));
+  --color-border: color-mix(in oklch, var(--color-text) 14%, var(--color-bg));
+
+  --shadow-color: color-mix(in oklch, black 55%, var(--color-bg));
+  --shadow-1: 0 1rem 2.2rem var(--shadow-color);
+
+  --ring: color-mix(in oklch, var(--color-primary) 48%, black);
+  --ring-offset: color-mix(in oklch, var(--color-bg) 70%, black);
+}
+
+/* System preference (only when user hasn't explicitly chosen) */
+@media (prefers-color-scheme: dark) {
+  :root:not(.dark-theme):not(.light-theme) {
+    --color-bg: oklch(0.18 0.02 220);
+    --color-surface: oklch(0.23 0.02 220);
+    --color-surface-2: color-mix(in oklch, var(--color-surface) 86%, var(--sea));
+
+    --color-text: oklch(0.95 0 0);
+    --color-muted: color-mix(in oklch, var(--color-text) 65%, var(--color-bg));
+    --color-border: color-mix(in oklch, var(--color-text) 14%, var(--color-bg));
+
+    --shadow-color: color-mix(in oklch, black 55%, var(--color-bg));
+    --shadow-1: 0 1rem 2.2rem var(--shadow-color);
+
+    --ring: color-mix(in oklch, var(--color-primary) 48%, black);
+    --ring-offset: color-mix(in oklch, var(--color-bg) 70%, black);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* =========================
+   BASE
+   ========================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  block-size: 100%;
+}
+
+body {
+  margin: 0;
+  min-block-size: 100%;
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.55;
+
+  background:
+    radial-gradient(
+      1200px 700px at 15% 0%,
+      color-mix(in oklch, var(--sun) 35%, transparent),
+      transparent 55%
+    ),
+    radial-gradient(
+      1000px 600px at 90% 10%,
+      color-mix(in oklch, var(--sea) 25%, transparent),
+      transparent 55%
+    ),
+    var(--color-bg);
+
+  color: var(--color-text);
+
+  transition:
+    background-color var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+}
+
+img {
+  display: block;
+  max-inline-size: 100%;
+  block-size: auto;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.15;
+  margin: 0;
+}
+
+p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+:where(button) {
+  font: inherit;
+}
+
+:where(button, a, input, select, textarea):focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 3px;
+  border-radius: calc(var(--radius-1) - 0.2rem);
+}
+
+:where(button) {
+  cursor: pointer;
+  border: 1px solid transparent;
+  background: transparent;
+  color: inherit;
+}
+
+/* =========================
+   COMPOSITION
+   ========================= */
+
+.container {
+  inline-size: min(100% - 2rem, var(--container));
+  margin-inline: auto;
+}
+
+.flow > * + * {
+  margin-block-start: var(--flow-space, 1rem);
+}
+
+/* =========================
+   UTILITIES
+   ========================= */
+
+.visually-hidden {
+  position: absolute !important;
+  inline-size: 1px;
+  block-size: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* =========================
+   BLOCKS
+   ========================= */
+
+main {
+  inline-size: min(100% - 2rem, var(--container));
+  margin-inline: auto;
+  padding-block: var(--space-6);
+  display: grid;
+  gap: var(--space-5);
+}
+
+/* Header */
+.site-header {
+  position: sticky;
+  inset-block-start: 0;
+  z-index: 10;
+
+  background: color-mix(in oklch, var(--color-bg) 65%, var(--color-surface));
+  border-block-end: 1px solid var(--color-border);
+  backdrop-filter: blur(12px);
+
+  transition:
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease);
+
+  .header-content {
+    inline-size: min(100% - 2rem, var(--container));
+    margin-inline: auto;
+    padding-block: var(--space-3);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+  }
+
+  .site-title {
+    font-size: var(--text-xl);
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Theme toggle */
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+
+  padding-block: 0.55rem;
+  padding-inline: 0.95rem;
+
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: color-mix(in oklch, var(--color-surface) 94%, var(--sun));
+  box-shadow: 0 0.6rem 1.5rem var(--shadow-color);
+
+  transition:
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+
+  &:hover {
+    background: color-mix(in oklch, var(--color-surface) 90%, var(--color-primary));
+    border-color: color-mix(in oklch, var(--color-primary) 25%, var(--color-border));
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  .theme-label {
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+
+  &:has(.theme-icon-dark[style*="display: inline"]) {
+    border-color: color-mix(in oklch, var(--color-primary) 35%, var(--color-border));
+  }
+}
+
+/* Hero */
+.hero {
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in oklch, var(--sun) 25%, var(--color-surface)),
+      color-mix(in oklch, var(--sea) 22%, var(--color-surface))
+    );
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2);
+  padding: clamp(1.6rem, 2.6vw + 1rem, 3.2rem);
+  box-shadow: var(--shadow-1);
+
+  transition:
+    border-color var(--dur) var(--ease),
+    background-color var(--dur) var(--ease);
+
+  .hero-title {
+    font-size: var(--text-2xl);
+    letter-spacing: -0.03em;
+  }
+
+  .hero-description {
+    margin-block-start: var(--space-2);
+    max-inline-size: 65ch;
+    font-size: var(--text-lg);
+    color: color-mix(in oklch, var(--color-text) 78%, var(--color-bg));
+  }
+}
+
+/* Filters */
+.filters {
+  .filter-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+    align-items: center;
+  }
+}
+
+.filter-button {
+  padding-block: 0.55rem;
+  padding-inline: 0.95rem;
+
+  border-radius: 999px;
+  border: 1px solid var(--color-border);
+  background: color-mix(in oklch, var(--color-surface) 94%, var(--sun));
+  color: var(--color-text);
+  font-size: var(--text-sm);
+
+  transition:
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease),
+    color var(--dur) var(--ease);
+
+  &:hover {
+    background: color-mix(in oklch, var(--color-surface) 88%, var(--color-primary));
+    border-color: color-mix(in oklch, var(--color-primary) 25%, var(--color-border));
+  }
+
+  &:active {
+    transform: translateY(1px);
+  }
+
+  &.active {
+    background: linear-gradient(
+      135deg,
+      var(--color-primary),
+      color-mix(in oklch, var(--color-primary) 75%, var(--coral))
+    );
+    border-color: color-mix(in oklch, var(--color-primary) 55%, black);
+    color: oklch(0.99 0 0);
+  }
+}
+
+/* Products */
+.products {
+  .product-grid {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fit, minmax(min(16.5rem, 100%), 1fr));
+  }
+}
+
+/* Card */
+.product-card {
+  background: color-mix(in oklch, var(--color-surface) 97%, var(--sun));
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-2);
+  overflow: clip;
+
+  box-shadow: 0 0.6rem 1.6rem var(--shadow-color);
+
+  transition:
+    transform var(--dur) var(--ease),
+    box-shadow var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    background-color var(--dur) var(--ease);
+
+  display: grid;
+  grid-template-rows: auto 1fr;
+
+  &:hover {
+    transform: translateY(-3px) rotate(-0.15deg);
+    box-shadow: var(--shadow-1);
+    border-color: color-mix(in oklch, var(--color-primary) 22%, var(--color-border));
+  }
+
+  .product-image {
+    inline-size: 100%;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    background: var(--color-surface-2);
+  }
+
+  .product-content {
+    padding: var(--space-4);
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  .product-title {
+    font-size: var(--text-lg);
+    letter-spacing: -0.01em;
+  }
+
+  .product-description {
+    color: var(--color-muted);
+  }
+
+  .product-footer {
+    margin-block-start: var(--space-2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+
+  .product-price {
+    font-weight: 800;
+    letter-spacing: -0.01em;
+    color: color-mix(in oklch, var(--color-text) 92%, var(--color-bg));
+  }
+}
+
+.product-button {
+  padding-block: 0.62rem;
+  padding-inline: 0.95rem;
+
+  border-radius: 0.95rem;
+  border: 1px solid color-mix(in oklch, var(--color-primary) 35%, var(--color-border));
+
+  background: linear-gradient(
+    135deg,
+    color-mix(in oklch, var(--color-primary) 22%, var(--color-surface)),
+    color-mix(in oklch, var(--coral) 14%, var(--color-surface))
+  );
+
+  color: var(--color-text);
+  font-size: var(--text-sm);
+
+  transition:
+    background-color var(--dur) var(--ease),
+    border-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+
+  &:hover {
+    border-color: color-mix(in oklch, var(--color-primary) 55%, var(--color-border));
+    transform: translateY(-1px);
+  }
+
+  &:active {
+    transform: translateY(1px);
+    background: color-mix(in oklch, var(--color-primary) 26%, var(--color-surface));
+  }
+}
+
+/* Footer */
+.site-footer {
+  border-block-start: 1px solid var(--color-border);
+  padding-block: var(--space-4);
+  margin-block-start: var(--space-6);
+
+  .footer-text {
+    inline-size: min(100% - 2rem, var(--container));
+    margin-inline: auto;
+    text-align: center;
+    font-size: var(--text-sm);
+    color: var(--color-muted);
+  }
+}
+
+/* =========================
+   RESPONSIVE
+   ========================= */
+
+@media (max-width: 36rem) {
+  .site-header {
+    .header-content {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+
+  .product-card {
+    .product-footer {
+      flex-direction: column;
+      align-items: stretch;
+
+      .product-button {
+        inline-size: 100%;
+      }
+    }
+  }
+}
+
+/* =========================
+   MODERN SELECTORS (explicit usage)
+   ========================= */
+
+/* :has() meaningful use + maintains layout consistency */
+.product-card:has(.product-button) .product-footer {
+  min-block-size: 2.9rem;
+}
+
+/* :is() reduces repetition */
+:is(.hero, .products, .filters) :is(h2, h3) {
+  color: var(--color-text);
+}
