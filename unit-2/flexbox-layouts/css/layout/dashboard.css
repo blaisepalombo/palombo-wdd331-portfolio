@@ -10,127 +10,138 @@
  * - Cards in main content should use nested Flexbox with sticky footers
  */
 
-/* TODO: Style the dashboard container
- * Hint: Use display: flex with flex-direction: column and min-height: 100vh
- * This creates a full-height column flex container
- */
+/* Dashboard container: full-height column flex layout for sticky footer */
 .dashboard {
-    /* Your code here */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
-/* TODO: Style the dashboard header
- * Hint: Fixed height, use Flexbox to position logo and user menu
- * Use align-items: center for vertical alignment
- * Consider how to push user menu to the right
- */
+/* Header: flex row, center items, push user menu right with margin-left:auto */
 .dashboard-header {
-    /* Your code here */
-    height: var(--header-height);
-    background-color: var(--color-primary);
-    color: white;
-    padding: 0 var(--spacing-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-lg);
+
+  height: var(--header-height);
+  background-color: var(--color-primary);
+  color: white;
+  padding: 0 var(--spacing-lg);
 }
 
 .dashboard-logo {
-    font-size: var(--font-size-large);
-    font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
 }
 
 .dashboard-user-menu {
-    /* Your code here - how do you push this to the right? */
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-med);
 }
 
-/* TODO: Style the main body area (sidebar + content)
- * Hint: This should be a Flexbox row that grows to fill available space
- * Use flex: 1 to make this section expand
- */
+/* Body: grows to fill available height; row layout for sidebar + main */
 .dashboard-body {
-    /* Your code here */
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;     /* fill remaining vertical space */
+  flex-shrink: 1;
+  flex-basis: auto;
+  min-height: 0;    /* prevents overflow issues in some browsers */
 }
 
-/* TODO: Style the sidebar
- * Hint: Fixed width using var(--sidebar-width)
- * Use flex-shrink: 0 to prevent it from shrinking
- * Sidebar navigation items should stack vertically
- */
+/* Sidebar: fixed width and no shrinking */
 .dashboard-sidebar {
-    /* Your code here */
-    background-color: var(--color-surface);
-    border-right: 1px solid var(--color-border);
-    padding: var(--spacing-lg);
+  flex-grow: 0;
+  flex-shrink: 0;
+  flex-basis: var(--sidebar-width);
+
+  background-color: var(--color-surface);
+  border-right: 1px solid var(--color-border);
+  padding: var(--spacing-lg);
 }
 
+/* Nav stack */
 .sidebar-nav {
-    /* Your code here - stack nav items vertically */
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
 }
 
 .sidebar-nav-item {
-    padding: var(--spacing-sm) var(--spacing-med);
-    border-radius: var(--radius-sm);
-    margin-bottom: var(--spacing-sm);
-    display: block;
+  padding: var(--spacing-sm) var(--spacing-med);
+  border-radius: var(--radius-sm);
+  display: block;
 }
 
 .sidebar-nav-item:hover {
-    background-color: var(--color-border);
+  background-color: var(--color-border);
 }
 
-/* TODO: Style the main content area
- * Hint: Should grow to fill remaining width
- * Use flex: 1 to expand
- */
+/* Main: fills remaining width */
 .dashboard-main {
-    /* Your code here */
-    padding: var(--spacing-xl);
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 0;
+
+  padding: var(--spacing-xl);
+  min-width: 0;
 }
 
-/* TODO: Style the cards container
- * Hint: Consider using Flexbox with flex-wrap or CSS Grid
- * Cards should be arranged in a responsive grid pattern
- */
+/* Cards container: responsive flex wrap grid */
 .dashboard-cards {
-    /* Your code here */
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-lg);
+  align-content: flex-start; /* align-content requirement (wrap + multiple rows) */
 }
 
-/* TODO: Style individual cards with nested Flexbox
- * Hint: Each card should be a flex container with flex-direction: column
- * The card body should use flex: 1 to push the footer to the bottom
- * This is the sticky footer pattern from the reading
- */
+/* Card: flex item sizing + nested flex column for sticky footer */
 .dashboard-card {
-    /* Your code here */
-    background-color: white;
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-med);
-    box-shadow: var(--shadow-sm);
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: 280px;
+
+  display: flex;
+  flex-direction: column;
+
+  background-color: white;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-med);
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
 }
 
 .dashboard-card-header {
-    padding: var(--spacing-med);
-    border-bottom: 1px solid var(--color-border);
-    font-weight: var(--font-weight-bold);
+  padding: var(--spacing-med);
+  border-bottom: 1px solid var(--color-border);
+  font-weight: var(--font-weight-bold);
 }
 
 .dashboard-card-body {
-    /* Your code here - this should grow to fill available space */
-    padding: var(--spacing-med);
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+
+  padding: var(--spacing-med);
+  min-height: 0;
 }
 
 .dashboard-card-footer {
-    /* Your code here - this should stay at the bottom */
-    padding: var(--spacing-med);
-    border-top: 1px solid var(--color-border);
-    background-color: var(--color-surface);
+  margin-top: auto; /* sticky footer inside the card */
+  padding: var(--spacing-med);
+  border-top: 1px solid var(--color-border);
+  background-color: var(--color-surface);
 }
 
-/* TODO: Style the dashboard footer
- * Hint: Fixed height that stays at bottom
- * Use Flexbox to center content if needed
- */
+/* Footer: fixed height, pinned to bottom by dashboard flex layout */
 .dashboard-footer {
-    /* Your code here */
-    height: 60px;
-    background-color: var(--color-surface);
-    border-top: 1px solid var(--color-border);
-    padding: 0 var(--spacing-lg);
+  height: 60px;
+  background-color: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: 0 var(--spacing-lg);
+
+  display: flex;
+  align-items: center;
 }
