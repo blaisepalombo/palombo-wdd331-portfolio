@@ -1,0 +1,141 @@
+/**
+ * Portfolio Card Grid with Subgrid
+ * 
+ * Demonstrates:
+ * 1. Responsive auto-fit columns
+ * 2. Fallback card layout
+ * 3. Subgrid enhancement for aligned content
+ */
+
+/* ===========================================
+   PAGE STRUCTURE
+   =========================================== */
+body {
+    background: var(--color-background);
+}
+
+.portfolio-page {
+    min-height: 100vh;
+}
+
+/* ===========================================
+   HEADER
+   =========================================== */
+.portfolio-header {
+    background: var(--color-surface);
+    padding: var(--spacing-xl);
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.portfolio-header h1 {
+    margin-bottom: var(--spacing-sm);
+}
+
+.portfolio-header p {
+    color: var(--color-text-muted);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* ===========================================
+   PORTFOLIO GRID
+   =========================================== */
+.portfolio-section {
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+    padding: var(--spacing-xl);
+}
+
+.portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+    gap: var(--spacing-lg);
+}
+
+.portfolio-card {
+    display: grid;
+    grid-template-rows: auto 250px 1fr auto;
+    gap: var(--spacing-sm);
+    background: var(--color-surface);
+    border-radius: var(--radius-med);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--color-border);
+}
+
+/* ===========================================
+   CARD CONTENT (Direct Children of Card)
+   =========================================== */
+.portfolio-card-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+    border-bottom: 2px solid var(--color-primary);
+    color: var(--color-text);
+}
+
+.portfolio-card-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius-sm);
+}
+
+.portfolio-card-description {
+    font-size: var(--font-size-med);
+    color: var(--color-text-muted);
+    line-height: var(--line-height-lg);
+    align-self: start;
+}
+
+.portfolio-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--spacing-med);
+    border-top: 1px solid var(--color-border);
+}
+
+.card-tag {
+    font-size: var(--font-size-sm);
+    color: var(--color-primary);
+    background: rgba(59, 130, 246, 0.1);
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border-radius: var(--radius-sm);
+}
+
+/* ===========================================
+   FALLBACK FOR BROWSERS WITHOUT SUBGRID
+   =========================================== */
+@supports (grid-template-rows: subgrid) {
+    .portfolio-grid {
+        grid-auto-rows: auto 250px 1fr auto;
+    }
+
+    .portfolio-card {
+        grid-row: span 4;
+        grid-template-rows: subgrid;
+    }
+}
+
+/* ===========================================
+   REFLECTION QUESTIONS
+   =========================================== */
+/*
+   ANSWER THESE IN YOUR ASSIGNMENT FORM:
+   
+   1. What problem does subgrid solve in this layout?
+      - Without subgrid, what happens when one card has a longer title?
+      - How does subgrid fix this?
+   
+   2. What would happen if you DIDN'T use subgrid here?
+      - Try it! Comment out the subgrid code temporarily.
+      - How does the layout look different?
+      - Why is subgrid better for this use case?
+   
+   3. When should you NOT use subgrid?
+      - If each card had completely different content structure?
+      - If cards were independent modules with no alignment needs?
+*/
