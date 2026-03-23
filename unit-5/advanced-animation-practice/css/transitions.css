@@ -1,0 +1,15 @@
+/* transitions.css — Your work goes here. */
+
+/* ============================================================
+   VIEW TRANSITIONS
+   ============================================================ */
+
+::view-transition-old(root) {
+  animation-duration: 120ms;
+  animation-timing-function: ease-out;
+}
+
+::view-transition-new(root) {
+  animation-duration: 180ms;
+  animation-timing-function: ease-out;
+}
