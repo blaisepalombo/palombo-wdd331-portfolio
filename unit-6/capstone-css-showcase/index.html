@@ -3,135 +3,280 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sport Bike Showcase</title>
-
-    <!-- Main CSS -->
+    <title>Modern Sport Bike Showcase</title>
+    <meta
+      name="description"
+      content="A modern CSS showcase focused on new sport bikes, responsive design, motion, layout, and visual styling."
+    />
     <link rel="stylesheet" href="./css/style.css" />
   </head>
 
   <body>
-    <!-- NAVBAR -->
     <header class="navbar">
-      <div class="nav-container">
-        <h1 class="logo">Sport Bikes</h1>
-        <nav>
+      <div class="nav-container container">
+        <a href="#hero" class="logo">Sport Bikes</a>
+
+        <nav aria-label="Primary navigation">
           <ul class="nav-links">
             <li><a href="#hero">Home</a></li>
-            <li><a href="#categories">Categories</a></li>
+            <li><a href="#categories">Classes</a></li>
             <li><a href="#featured">Featured</a></li>
             <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#features">Tech</a></li>
           </ul>
         </nav>
       </div>
     </header>
 
-    <!-- HERO -->
-    <section id="hero" class="hero">
-      <div class="hero-content">
-        <h2>Modern Sport Bikes</h2>
-        <p>
-          A showcase of cutting-edge motorcycles featuring modern CSS design,
-          layout, and animation techniques.
-        </p>
-      </div>
-    </section>
+    <main>
+      <section id="hero" class="hero">
+        <div class="hero-content container">
+          <p class="eyebrow">WDD 331R Advanced CSS</p>
+          <h1>New Sport Bikes</h1>
+          <p class="hero-text">
+            A custom showcase site focused on modern supersport and superbike
+            machines, built to demonstrate responsive layout, motion, visual
+            polish, and advanced CSS techniques.
+          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#featured">Explore Bikes</a>
+            <a class="button button-secondary" href="#gallery">View Gallery</a>
+          </div>
+        </div>
+      </section>
 
-    <!-- CATEGORIES (GRID) -->
-    <section id="categories" class="section categories">
-      <h2 class="section-title">Bike Categories</h2>
+      <section id="categories" class="section categories">
+        <div class="container">
+          <h2 class="section-title">Sport Bike Classes</h2>
+          <p class="section-subtitle">
+            Modern sport bikes range from lightweight middleweights to
+            full-power superbikes built for speed, precision, and aggressive
+            styling.
+          </p>
 
-      <div class="grid categories-grid">
-        <div class="card">
-          <img src="./images/supersport.jpg" alt="Supersport bike" />
-          <h3>Supersport</h3>
-          <p>Lightweight, aggressive, and built for speed.</p>
+          <div class="categories-grid">
+            <article class="card">
+              <img
+                src="./images/yamaha-r7.jpg"
+                alt="Blue Yamaha R7 parked outdoors"
+              />
+              <div class="card-body">
+                <h3>Middleweight</h3>
+                <p>
+                  Bikes like the Yamaha R7 balance sharp styling, usable power,
+                  and strong everyday handling.
+                </p>
+              </div>
+            </article>
+
+            <article class="card">
+              <img
+                src="./images/honda-cbr600rr.jpg"
+                alt="Red Honda CBR600RR sport bike"
+              />
+              <div class="card-body">
+                <h3>Supersport</h3>
+                <p>
+                  Supersport bikes such as the Honda CBR600RR are light,
+                  aggressive, and built around precision.
+                </p>
+              </div>
+            </article>
+
+            <article class="card">
+              <img
+                src="./images/bmw-s1000rr.jpg"
+                alt="BMW S1000RR superbike"
+              />
+              <div class="card-body">
+                <h3>Superbike</h3>
+                <p>
+                  Superbikes like the BMW S1000RR bring serious horsepower,
+                  electronics, and race-inspired engineering.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="featured" class="section featured">
+        <div class="container">
+          <h2 class="section-title">Featured Bikes</h2>
+          <p class="section-subtitle">
+            These current sport bikes stand out for performance, styling, and
+            modern technology.
+          </p>
+
+          <div class="featured-container">
+            <article class="bike-card">
+              <img
+                src="./images/yamaha-r1.jpg"
+                alt="Blue Yamaha YZF-R1 superbike"
+              />
+              <div class="bike-card-content">
+                <span class="bike-tag">Superbike</span>
+                <h3>Yamaha YZF-R1</h3>
+                <p>
+                  A high-performance superbike with aggressive aerodynamics,
+                  advanced electronics, and track-focused styling.
+                </p>
+              </div>
+            </article>
+
+            <article class="bike-card">
+              <img
+                src="./images/kawasaki-zx6r.jpg"
+                alt="Green Kawasaki Ninja ZX-6R sport bike"
+              />
+              <div class="bike-card-content">
+                <span class="bike-tag">Supersport</span>
+                <h3>Kawasaki Ninja ZX-6R</h3>
+                <p>
+                  A modern supersport known for strong midrange power,
+                  aggressive bodywork, and everyday sport riding appeal.
+                </p>
+              </div>
+            </article>
+
+            <article class="bike-card">
+              <img
+                src="./images/ducati-panigale-v2.jpg"
+                alt="Red Ducati Panigale V2 sport bike"
+              />
+              <div class="bike-card-content">
+                <span class="bike-tag">Premium Sport</span>
+                <h3>Ducati Panigale V2</h3>
+                <p>
+                  A premium Italian sport bike with striking styling, smooth
+                  power delivery, and serious cornering presence.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section id="gallery" class="section gallery">
+        <div class="container">
+          <h2 class="section-title">Gallery</h2>
+          <p class="section-subtitle">
+            This horizontal gallery is a clean way to demonstrate scroll snap
+            and strong visual presentation.
+          </p>
         </div>
 
-        <div class="card">
-          <img src="./images/hyperbike.jpg" alt="Hyperbike" />
-          <h3>Hyperbike</h3>
-          <p>Extreme performance and cutting-edge engineering.</p>
+        <div class="scroll-gallery" aria-label="Sport bike image gallery">
+          <figure class="gallery-item">
+            <img
+              src="./images/aprilia-rs660.jpg"
+              alt="Aprilia RS 660 sport bike in profile view"
+            />
+            <figcaption>Aprilia RS 660</figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img
+              src="./images/suzuki-gsxr1000.jpg"
+              alt="Suzuki GSX-R1000 parked on pavement"
+            />
+            <figcaption>Suzuki GSX-R1000</figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img
+              src="./images/honda-cbr1000rr-r.jpg"
+              alt="Honda CBR1000RR-R Fireblade sport bike"
+            />
+            <figcaption>Honda CBR1000RR-R</figcaption>
+          </figure>
+
+          <figure class="gallery-item">
+            <img
+              src="./images/bmw-s1000rr-gallery.jpg"
+              alt="BMW S1000RR from a front three-quarter angle"
+            />
+            <figcaption>BMW S1000RR</figcaption>
+          </figure>
         </div>
+      </section>
 
-        <div class="card">
-          <img src="./images/track.jpg" alt="Track bike" />
-          <h3>Track Focused</h3>
-          <p>Designed for precision and race performance.</p>
+      <section id="features" class="section features">
+        <div class="container">
+          <h2 class="section-title">Performance Technology</h2>
+          <p class="section-subtitle">
+            Modern sport bikes combine power, lightweight design, electronics,
+            and aerodynamic shaping for better control and speed.
+          </p>
+
+          <div class="features-grid">
+            <article class="feature">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="10" />
+              </svg>
+              <h3>High Output Engines</h3>
+              <p>
+                New sport bikes use compact, high-revving engines built for
+                acceleration and strong top-end performance.
+              </p>
+            </article>
+
+            <article class="feature">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <rect x="4" y="4" width="16" height="16" />
+              </svg>
+              <h3>Lightweight Frames</h3>
+              <p>
+                Aluminum chassis designs help improve handling, agility, and
+                rider confidence through corners.
+              </p>
+            </article>
+
+            <article class="feature">
+              <svg
+                width="48"
+                height="48"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <polygon points="12,2 22,22 2,22" />
+              </svg>
+              <h3>Aero and Electronics</h3>
+              <p>
+                Aerodynamic fairings, traction control, ride modes, and
+                quickshifters all shape the modern sport bike experience.
+              </p>
+            </article>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- FEATURED (FLEXBOX) -->
-    <section id="featured" class="section featured">
-      <h2 class="section-title">Featured Bikes</h2>
-
-      <div class="flex featured-container">
-        <div class="bike-card">
-          <img src="./images/r1.jpg" alt="Yamaha R1" />
-          <h3>Yamaha R1</h3>
-          <p>High-performance superbike with MotoGP DNA.</p>
+      <section class="section showcase-note">
+        <div class="container note-box">
+          <h2 class="section-title">About This Project</h2>
+          <p class="section-subtitle">
+            This site is designed as an Advanced CSS showcase using custom
+            properties, Grid, Flexbox, transitions, keyframe animation, scroll
+            snap, SVG, gradients, and reduced-motion support.
+          </p>
         </div>
+      </section>
+    </main>
 
-        <div class="bike-card">
-          <img src="./images/cbr1000rr.jpg" alt="Honda CBR1000RR" />
-          <h3>Honda CBR1000RR</h3>
-          <p>Precision engineering with track-ready performance.</p>
-        </div>
-
-        <div class="bike-card">
-          <img src="./images/zx10r.jpg" alt="Kawasaki ZX-10R" />
-          <h3>Kawasaki ZX-10R</h3>
-          <p>Championship-winning power and control.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- GALLERY (SCROLL SNAP) -->
-    <section id="gallery" class="section gallery">
-      <h2 class="section-title">Gallery</h2>
-
-      <div class="scroll-gallery">
-        <img src="./images/gallery1.jpg" alt="Sport bike 1" />
-        <img src="./images/gallery2.jpg" alt="Sport bike 2" />
-        <img src="./images/gallery3.jpg" alt="Sport bike 3" />
-        <img src="./images/gallery4.jpg" alt="Sport bike 4" />
-      </div>
-    </section>
-
-    <!-- FEATURES (SVG / ICONS) -->
-    <section id="features" class="section features">
-      <h2 class="section-title">Performance Features</h2>
-
-      <div class="grid features-grid">
-        <div class="feature">
-          <svg width="40" height="40" viewBox="0 0 24 24">
-            <circle cx="12" cy="12" r="10" />
-          </svg>
-          <h3>High Power</h3>
-          <p>Advanced engines delivering maximum horsepower.</p>
-        </div>
-
-        <div class="feature">
-          <svg width="40" height="40" viewBox="0 0 24 24">
-            <rect x="4" y="4" width="16" height="16" />
-          </svg>
-          <h3>Lightweight</h3>
-          <p>Optimized frames for speed and agility.</p>
-        </div>
-
-        <div class="feature">
-          <svg width="40" height="40" viewBox="0 0 24 24">
-            <polygon points="12,2 22,22 2,22" />
-          </svg>
-          <h3>Aerodynamics</h3>
-          <p>Designed for stability at high speeds.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
     <footer class="footer">
-      <p>© 2026 Sport Bike Showcase | Advanced CSS Project</p>
+      <div class="container">
+        <p>© 2026 Modern Sport Bike Showcase | WDD 331R Advanced CSS</p>
+      </div>
     </footer>
   </body>
 </html>
