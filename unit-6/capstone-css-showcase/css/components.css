@@ -266,7 +266,3 @@
   }
 }
 
-.r1-img {
-  object-fit: contain;
-  background: var(--color-surface);
-}
