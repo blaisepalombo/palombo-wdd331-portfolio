@@ -28,6 +28,7 @@
   position: relative;
   z-index: 2;
   padding: 2rem;
+  animation: hero-rise 0.9s ease-out both;
 }
 
 .hero::after {
@@ -40,6 +41,7 @@
   background: radial-gradient(circle, rgba(220, 38, 38, 0.28), transparent 70%);
   filter: blur(16px);
   z-index: 1;
+  animation: glow-float 5s ease-in-out infinite;
 }
 
 .gallery .section-title,
@@ -80,6 +82,29 @@
 
 .features-grid .feature {
   padding: var(--space-xl) var(--space-lg);
+}
+
+@keyframes hero-rise {
+  from {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow-float {
+  0%,
+  100% {
+    transform: translateY(0) scale(1);
+  }
+
+  50% {
+    transform: translateY(-12px) scale(1.05);
+  }
 }
 
 @media (max-width: 700px) {

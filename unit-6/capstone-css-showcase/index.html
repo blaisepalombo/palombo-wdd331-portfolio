@@ -11,7 +11,10 @@
     <link rel="stylesheet" href="./css/style.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Inter:wght@300;400;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
 
   <body>
@@ -121,9 +124,10 @@
 
           <div class="featured-container">
             <article class="bike-card">
-              <img
-                src="./images/yamaha-r1.jpeg"
+              <img 
+                src="./images/yamaha-r1.jpg" 
                 alt="Blue Yamaha YZF-R1 superbike"
+                class="r1-img"
               />
               <div class="bike-card-content">
                 <span class="bike-tag">Superbike</span>
@@ -223,12 +227,19 @@
           <div class="features-grid">
             <article class="feature">
               <svg
-                width="48"
-                height="48"
+                class="feature-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
                 viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
                 aria-hidden="true"
               >
-                <circle cx="12" cy="12" r="10" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="m3.75 13.5 10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75Z"
+                />
               </svg>
               <h3>High Output Engines</h3>
               <p>
@@ -239,12 +250,21 @@
 
             <article class="feature">
               <svg
-                width="48"
-                height="48"
+                class="feature-icon"
+                xmlns="http://www.w3.org/2000/svg"
                 viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
                 aria-hidden="true"
               >
-                <rect x="4" y="4" width="16" height="16" />
+                <path
+                  d="M12.67 19a2 2 0 0 0 1.416-.588l6.154-6.172a6 6 0 0 0-8.49-8.49L5.586 9.914A2 2 0 0 0 5 11.328V18a1 1 0 0 0 1 1z"
+                />
+                <path d="M16 8 2 22" />
+                <path d="M17.5 15H9" />
               </svg>
               <h3>Lightweight Frames</h3>
               <p>
@@ -255,17 +275,24 @@
 
             <article class="feature">
               <svg
-                width="48"
-                height="48"
+                class="feature-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
                 viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
                 aria-hidden="true"
               >
-                <polygon points="12,2 22,22 2,22" />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M8.25 3v1.5M4.5 8.25H3m18 0h-1.5M4.5 12H3m18 0h-1.5m-15 3.75H3m18 0h-1.5M8.25 19.5V21M12 3v1.5m0 15V21m3.75-18v1.5m0 15V21m-9-1.5h10.5a2.25 2.25 0 0 0 2.25-2.25V6.75a2.25 2.25 0 0 0-2.25-2.25H6.75A2.25 2.25 0 0 0 4.5 6.75v10.5a2.25 2.25 0 0 0 2.25 2.25Zm.75-12h9v9h-9v-9Z"
+                />
               </svg>
               <h3>Aero and Electronics</h3>
               <p>
-                Aerodynamic fairings, traction control, ride modes, and
-                quickshifters all shape the modern sport bike experience.
+                Rider modes, traction control, quickshifters, and aerodynamic
+                bodywork all help modern bikes feel faster and more stable.
               </p>
             </article>
           </div>
@@ -273,21 +300,24 @@
       </section>
 
       <section id="showcase" class="section showcase-note">
-        <div class="container note-box">
-          <h2 class="section-title">About This Showcase</h2>
-          <p class="section-subtitle">
-            This project is designed as an Advanced CSS showcase using custom
-            properties, organized CSS architecture, Grid, Flexbox, transitions,
-            keyframe animation, scroll snap, SVG, gradients, and reduced-motion
-            support.
-          </p>
+        <div class="container">
+          <h2 class="section-title">CSS Showcase Notes</h2>
+          <div class="note-box">
+            <p>
+              This site demonstrates custom properties, organized CSS files,
+              Flexbox and Grid layout, grid-template-areas in the featured
+              section, scroll snap gallery behavior, layered gradients,
+              transforms, responsive typography, inline SVG usage, and
+              reduced-motion support.
+            </p>
+          </div>
         </div>
       </section>
     </main>
 
     <footer class="footer">
       <div class="container">
-        <p>© 2026 Modern Sport Bike Showcase | WDD 331R Advanced CSS</p>
+        <p>Capstone CSS Showcase • WDD 331R Advanced CSS</p>
       </div>
     </footer>
   </body>

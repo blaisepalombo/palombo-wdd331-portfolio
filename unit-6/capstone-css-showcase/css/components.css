@@ -74,7 +74,11 @@
 }
 
 .button-primary {
-  background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+  background: linear-gradient(
+    135deg,
+    var(--color-accent),
+    var(--color-accent-2)
+  );
   color: #ffffff;
   box-shadow: var(--shadow-sm);
 }
@@ -223,12 +227,17 @@
   padding: var(--space-xl) var(--space-lg);
 }
 
-.feature svg {
+.feature-icon {
   display: block;
-  margin: 0 auto 1rem;
-  fill: var(--color-accent);
   width: 48px;
   height: 48px;
+  margin: 0 auto 1rem;
+  color: var(--color-accent);
+  stroke: currentColor;
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 6px 14px rgba(220, 38, 38, 0.25));
 }
 
 .note-box {
@@ -255,4 +264,9 @@
     width: 100%;
     max-width: 280px;
   }
+}
+
+.r1-img {
+  object-fit: contain;
+  background: var(--color-surface);
 }
