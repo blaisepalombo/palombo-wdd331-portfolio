@@ -15,6 +15,15 @@
   padding: 1rem var(--space-lg);
 }
 
+.site-nav {
+  display: flex;
+  align-items: center;
+}
+
+.mobile-nav {
+  position: relative;
+}
+
 .nav-links {
   display: flex;
   align-items: center;
@@ -72,6 +81,10 @@
   min-height: 240px;
 }
 
+main section[id] {
+  scroll-margin-top: 6.5rem;
+}
+
 .footer {
   padding: var(--space-xl) var(--space-lg) 2rem;
   text-align: center;
@@ -102,14 +115,18 @@
   }
 
   .nav-container {
-    flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
     padding-inline: var(--space-md);
   }
 
-  .nav-links {
-    justify-content: center;
-    gap: 1rem;
+  .site-nav {
+    position: relative;
+    flex: 0 0 auto;
+  }
+
+  .mobile-nav {
+    width: auto;
   }
 
   .categories-grid,
@@ -120,5 +137,9 @@
   .hero {
     min-height: 60vh;
     padding: 5rem 1rem;
+  }
+
+  main section[id] {
+    scroll-margin-top: 3rem;
   }
 }

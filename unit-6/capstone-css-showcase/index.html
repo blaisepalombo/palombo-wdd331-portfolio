@@ -22,15 +22,22 @@
       <div class="nav-container container">
         <a href="#hero" class="logo">Sport Bikes</a>
 
-        <nav aria-label="Primary navigation">
-          <ul class="nav-links">
-            <li><a href="#hero">Home</a></li>
-            <li><a href="#categories">Classes</a></li>
-            <li><a href="#featured">Featured</a></li>
-            <li><a href="#gallery">Gallery</a></li>
-            <li><a href="#features">Tech</a></li>
-            <li><a href="#showcase">Showcase</a></li>
-          </ul>
+        <nav class="site-nav" aria-label="Primary navigation">
+          <details class="mobile-nav">
+            <summary class="nav-toggle">
+              <span class="nav-toggle-icon" aria-hidden="true"></span>
+              <span class="nav-toggle-text">Menu</span>
+            </summary>
+
+            <ul class="nav-links">
+              <li><a href="#hero">Home</a></li>
+              <li><a href="#categories">Classes</a></li>
+              <li><a href="#featured">Featured</a></li>
+              <li><a href="#gallery">Gallery</a></li>
+              <li><a href="#features">Tech</a></li>
+              <li><a href="#showcase">Showcase</a></li>
+            </ul>
+          </details>
         </nav>
       </div>
     </header>
@@ -124,8 +131,8 @@
 
           <div class="featured-container">
             <article class="bike-card">
-              <img 
-                src="./images/yamaha-r1.jpg" 
+              <img
+                src="./images/yamaha-r1.jpg"
                 alt="Blue Yamaha YZF-R1 superbike"
                 class="r1-img"
               />
@@ -320,5 +327,16 @@
         <p>Capstone CSS Showcase • WDD 331R Advanced CSS</p>
       </div>
     </footer>
+
+    <script>
+      const mobileNav = document.querySelector(".mobile-nav");
+      const mobileLinks = document.querySelectorAll(".mobile-nav .nav-links a");
+
+      mobileLinks.forEach((link) => {
+        link.addEventListener("click", () => {
+          mobileNav.removeAttribute("open");
+        });
+      });
+    </script>
   </body>
 </html>
